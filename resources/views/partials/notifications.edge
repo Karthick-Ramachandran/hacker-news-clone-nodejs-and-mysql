@@ -1,0 +1,23 @@
+@if(getErrorFor())
+<div class="container mt-4">
+    <div class="alert alert-danger">
+        {{ getErrorFor() }}
+    </div>
+</div>
+@endif
+
+@if(flashMessage('success'))
+<div class="container mt-4">
+    <div class="alert alert-success">
+        {{ flashMessage('success') }}
+    </div>
+</div>
+@endif
+
+@if(flashMessage('error'))
+<div class="container mt-4">
+    <div class="alert alert-danger">
+        {{ flashMessage('error') }}
+    </div>
+</div>
+@endif

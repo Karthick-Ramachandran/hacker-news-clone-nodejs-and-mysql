@@ -1,0 +1,63 @@
+@layout('layouts.app')
+
+
+@section('content')
+
+<div class="card bg-color">
+    @each(story in news.data)
+    <div class="card-body">
+        <div>
+            <form class="form-data" method="POST" action="{{ route('upvote', {'id':story.id }) }}">
+                {{ csrfField() }}
+                <button type="submit">
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                </button>
+            </form>
+            &nbsp;
+            <a href="{{ story.url }}">
+                {{ story.title }}
+            </a>
+        </div>
+        <div class="mt-1 row container">
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+                <p class="text-muted">
+                    {{ story.__meta__.upvotes_count }} {{ story.__meta__.upvotes_count === 1 ? 'upvote' : 'upvotes' }}
+                </p>
+            </div> &nbsp; &nbsp;
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+                <p class="text-muted">
+                    {{ story.created_at }}
+                </p>
+
+            </div>&nbsp;&nbsp;
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+            <a href="/news/comments/{{ story.id }}">
+                    {{ story.__meta__.comments_count }} {{ story.__meta__.comments_count === 1 ? 'comment' : 'comments' }}
+                </a>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+    @endeach
+
+
+</div>
+<div class="row justify-content-center mt-1">
+    @if(news.page === 1)
+       <span class="text-muted">Page 1</span>
+    @else
+    <a href="?page={{ news.page - 1 }}" class="btn btn-primary">Previous</a>
+    @endif
+    
+</div>
+
+<div class="row justify-content-center mt-2">
+    @if(news.lastPage === news.page)
+    <span class="text-muted">No more data found</span>
+    @else
+    <a href="?page={{ news.page + 1 }}" class="btn btn-primary">Next</a>
+    @endif
+</div>
+
+@endsection

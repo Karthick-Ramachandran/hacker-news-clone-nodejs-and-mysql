@@ -1,0 +1,37 @@
+@layout('layouts.app')
+
+
+@section('content')
+
+<div class="card bg-color">
+    @each(story in news)
+    <div class="card-body">
+        <div>
+            <a href="{{ story.url }}">
+            {{ story.title }} <a href="/news/{{ story.id }}" class="text-muted">edit</a> &nbsp;<a href="/delete/news/{{ story.id }}" class="text-muted">delete</a>
+            </a>
+        </div>
+        <div class="mt-1 row container">
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+                <p class="text-muted">
+                    0 upvotes
+                </p>
+            </div> &nbsp; &nbsp;
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+                <p class="text-muted">
+                    {{ story.created_at }}
+                </p>
+
+            </div>&nbsp;&nbsp;
+            <div class="col-xs-4 col-ls-4 col-xs-6">
+                <a href="#">
+                    0 comments
+                </a>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+    @endeach
+</div>
+@endsection
